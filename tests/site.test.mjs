@@ -36,7 +36,7 @@ describe('every page', () => {
     test(`${page}: company disclosures in the footer (UK trading disclosure rules)`, () => {
       const footer = html.slice(html.indexOf('<footer'), html.indexOf('</footer>'));
       const year = new Date().getUTCFullYear();
-      assert.match(footer, new RegExp(`© 2001–${year} Hyperdimensional Limited`));
+      assert.match(footer, new RegExp(`© 2007–${year} Hyperdimensional Limited`));
       assert.match(footer, /Registered in England and Wales/);
       assert.match(footer, /Company number 06255378/);
       assert.match(footer, /<address[^>]*>Registered office: Kemp House, 152-160 City Road, London, EC1V 2NX<\/address>/);
@@ -71,17 +71,15 @@ describe('home page', () => {
     const ld = JSON.parse(head.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)[1]);
     assert.equal(ld['@type'], 'Organization');
     assert.equal(ld.url, `${ORIGIN}/`);
-    assert.equal(ld.foundingDate, '2001-06-30');
+    assert.equal(ld.foundingDate, '2007-05-22', 'incorporation date at Companies House');
     assert.equal(ld.legalName, 'Hyperdimensional Limited');
     assert.equal(ld.identifier, '06255378');
     assert.equal(ld.address?.postalCode, 'EC1V 2NX');
   });
 
-  test('content: name, provenance, copyright', () => {
+  test('content: name and copyright, no established line', () => {
     assert.match(html, /<h1 class="wordmark">hyperdimensional<\/h1>/);
-    assert.match(html, /<time datetime="2001-06-30T15:26:43Z">993914803<\/time>/, 'Unix timestamp as machine-readable date');
-    const year = new Date().getUTCFullYear();
-
+    assert.doesNotMatch(html, /established|993914803/i, 'established timestamp removed');
     assert.doesNotMatch(html, /\b[MDCLXVI]{3,}\b/, 'no Roman numerals');
   });
 });

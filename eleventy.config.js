@@ -2,8 +2,6 @@ import { readFileSync } from 'node:fs';
 
 const LOGO_SOURCE = 'src/assets/logo.svg';
 
-const fromUnix = (s) => new Date(s * 1000);
-
 /**
  * Inline the logo from its single source file, as a decorative graphic.
  * The accessible name always comes from adjacent text (the h1 or a link label).
@@ -22,9 +20,6 @@ export default function (eleventyConfig) {
   // Files in src/assets are published at the site root (/logo.svg, /favicon.ico …)
   eleventyConfig.addPassthroughCopy({ 'src/assets': '/' });
 
-  eleventyConfig.addFilter('unixToIso', (s) => fromUnix(s).toISOString().replace('.000Z', 'Z'));
-  eleventyConfig.addFilter('unixToDate', (s) => fromUnix(s).toISOString().slice(0, 10));
-  eleventyConfig.addFilter('unixToYear', (s) => fromUnix(s).getUTCFullYear());
   eleventyConfig.addFilter('host', (url) => new URL(url).host);
   eleventyConfig.addShortcode('logo', logo);
 
