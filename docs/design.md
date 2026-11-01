@@ -8,7 +8,7 @@
 | 1 | Lede: what the company does, in one sentence | Orient. It names both practices. |
 | 2 | **Delivery**: how we work with organisations whose technology delivery has stalled | Persuade. It's the commercial practice. |
 | 2 | **Creative technology**: performance tools and ways of seeing places | Show. It alludes to the work and links out. |
-| 3 | `established 993914803`, `© MMI–MMXXVI` | Provenance and legal, in house style |
+| 3 | `established 993914803`, `© 2001–2026` | Provenance and legal |
 
 Two practices of equal rank, so they sit side by side on wide screens and
 stack on narrow ones, each opened by the same rule. The lede is the bridge
@@ -89,8 +89,8 @@ None. The original glitch effect has been removed.
 - **The work is alluded to, not showcased.** Each project is a name, one line and an
   outbound link, held in `src/_data/work.js`. If the work grows, it gets its own
   page; until then a list is honest about the scale.
-- **Copyright is a range**, from the established year to the build year, in Roman
-  numerals, computed at build time.
+- **Copyright is a range**, from the established year to the build year, computed at
+  build time. Plain years, not Roman numerals: they read at a glance.
 - **No JavaScript.** The CSP forbids scripts outright.
 - **The mark's proportions are kept as drawn** (192×178). If the non-square
   proportion is an export artefact, squaring it is a one-line change.

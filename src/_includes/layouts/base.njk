@@ -49,7 +49,7 @@
 <footer class="site-footer">
 {%- set since = site.established | unixToYear %}
 <p>established <time datetime="{{ site.established | unixToIso }}">{{ site.established }}</time></p>
-<p>© <abbr title="{{ since }}–{{ build.year }}">{{ since | roman }}–{{ build.year | roman }}</abbr></p>
+<p>© {{ since }}–{{ build.year }}</p>
 </footer>
 </body>
 </html>

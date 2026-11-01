@@ -69,7 +69,8 @@ describe('home page', () => {
     assert.match(html, /<h1 class="wordmark">hyperdimensional<\/h1>/);
     assert.match(html, /<time datetime="2001-06-30T15:26:43Z">993914803<\/time>/, 'Unix timestamp as machine-readable date');
     const year = new Date().getUTCFullYear();
-    assert.match(html, new RegExp(`© <abbr title="2001–${year}">MMI–[MDCLXVI]+</abbr>`), 'roman-numeral copyright range ending this year');
+    assert.match(html, new RegExp(`<p>© 2001–${year}</p>`), 'copyright range in plain years, ending this year');
+    assert.doesNotMatch(html, /\b[MDCLXVI]{3,}\b/, 'no Roman numerals');
   });
 });
 

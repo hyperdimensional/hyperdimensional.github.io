@@ -109,7 +109,6 @@ body {
 }
 .site-footer p { margin: 0; }
 .site-footer time { color: var(--fg); font-variant-numeric: tabular-nums; }
-abbr[title] { text-decoration: none; cursor: help; }
 
 /* ── Links ─────────────────────────────────────────────────────────── */
 a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }

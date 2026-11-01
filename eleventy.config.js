@@ -2,18 +2,6 @@ import { readFileSync } from 'node:fs';
 
 const LOGO_SOURCE = 'src/assets/logo.svg';
 
-/** 1..3999 → Roman numerals (the site's house style for years). */
-export function roman(n) {
-  const table = [
-    [1000, 'M'], [900, 'CM'], [500, 'D'], [400, 'CD'], [100, 'C'], [90, 'XC'],
-    [50, 'L'], [40, 'XL'], [10, 'X'], [9, 'IX'], [5, 'V'], [4, 'IV'], [1, 'I'],
-  ];
-  if (!Number.isInteger(n) || n < 1 || n > 3999) throw new RangeError(`roman: ${n}`);
-  let out = '';
-  for (const [value, glyph] of table) while (n >= value) { out += glyph; n -= value; }
-  return out;
-}
-
 const fromUnix = (s) => new Date(s * 1000);
 
 /**
@@ -34,7 +22,6 @@ export default function (eleventyConfig) {
   // Files in src/assets are published at the site root (/logo.svg, /favicon.ico …)
   eleventyConfig.addPassthroughCopy({ 'src/assets': '/' });
 
-  eleventyConfig.addFilter('roman', roman);
   eleventyConfig.addFilter('unixToIso', (s) => fromUnix(s).toISOString().replace('.000Z', 'Z'));
   eleventyConfig.addFilter('unixToDate', (s) => fromUnix(s).toISOString().slice(0, 10));
   eleventyConfig.addFilter('unixToYear', (s) => fromUnix(s).getUTCFullYear());
