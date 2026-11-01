@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 178" role="img" aria-labelledby="hd-logo-title">
+  <title id="hd-logo-title">hyperdimensional</title>
+  <!-- Single even-odd path: black field, white glyph cut out, small "d" filled back in. -->
+  <path fill="currentColor" fill-rule="evenodd" d="
+    M0 0H192V178H0Z
+    M60 24H168V55H96V123H168V154H24V123H60Z
+    M139 133H155V128H159V148H139Z
+    M144 138H155V143H144Z"/>
+</svg>
