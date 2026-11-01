@@ -6,8 +6,8 @@
 | --- | --- | --- |
 | 1 | **hyperdimensional** and the mark | Identify |
 | 1 | Lede: what the company does, in one sentence | Orient. It names both practices. |
-| 2 | **Delivery**: how we work with organisations whose technology delivery has stalled | Persuade. It's the commercial practice. |
-| 2 | **Creative technology**: performance tools and ways of seeing places | Show. It alludes to the work and links out. |
+| 2 | **Consulting**: how we work with organisations whose technology delivery has stalled | Persuade. It's the commercial practice. |
+| 2 | **Projects**: the things we make, one line each | Show. It links out, with no framing sentence. |
 | 3 | `© 2007–2026 Hyperdimensional Limited` | Copyright, from incorporation |
 | 4 | Company number, jurisdiction, registered office | Legal: required on UK company websites, so shown on every page, smallest type |
 
@@ -62,11 +62,11 @@ for comfortable line length. The empty space after the shorter column is left al
 | Name | Neo-grotesque 700, −0.045em | Fills the measure: `(100vw − 2·margin) / 8.6`, max 12rem / 1 |
 | Lede | Neo-grotesque 400, −0.01em | `clamp(1.375rem, 1rem + 1.5vw, 2.125rem)` / 1.25, max 24em |
 | Body | Neo-grotesque 400 | 1.0625rem / 1.55 |
-| Labels (section headings, footer) | System monospace 400 | 0.875rem / 1.5 |
+| Section headings | Neo-grotesque 700, −0.01em | 1.375rem / 1.25 |
+| Footer | System monospace 400 | 0.875rem / 1.5 (legal lines 0.75rem) |
 
 Neo-grotesque = Helvetica Neue → Helvetica → Arial → system. The heavy grotesk echoes
-the mark's solid blocks. Monospace marks the "machine" layer: section labels and the
-footer. System fonts only: no downloads, nothing for the CSP to allow.
+the mark's solid blocks. Monospace is kept for the footer: copyright and company details. System fonts only: no downloads, nothing for the CSP to allow.
 
 ### Colour
 

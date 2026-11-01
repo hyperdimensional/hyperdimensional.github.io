@@ -92,7 +92,8 @@ describe('home page copy', () => {
     assert.match(main, /<p class="lede">[^<]*delivery[^<]*<\/p>/i, 'lede names delivery');
     assert.match(main, /<p class="lede">[^<]*perform[^<]*<\/p>/i, 'lede names performance');
     const h2 = [...main.matchAll(/<h2[^>]*>([^<]+)<\/h2>/g)].map((m) => m[1]);
-    assert.deepEqual(h2, ['Delivery', 'Creative technology']);
+    assert.deepEqual(h2, ['Consulting', 'Projects']);
+    assert.doesNotMatch(main, /same curiosity/i, 'no filler intro to the projects');
   });
 
   test('alludes to the work, with links', () => {
