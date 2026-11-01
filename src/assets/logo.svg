@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 216 216" role="img" aria-labelledby="hd-logo-title">
+  <title id="hd-logo-title">hyperdimensional</title>
+  <!-- Single even-odd path: black disc (diameter 216 = 18 glyph modules of 12),
+       white glyph cut out (centred, offset 12,19), small "d" filled back in. -->
+  <path fill="currentColor" fill-rule="evenodd" d="
+    M108 0A108 108 0 1 1 108 216A108 108 0 1 1 108 0Z
+    M72 43H180V74H108V142H180V173H36V142H72Z
+    M151 152H167V147H171V167H151Z
+    M156 157H167V162H156Z"/>
+</svg>

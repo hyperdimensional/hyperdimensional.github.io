@@ -1,0 +1,117 @@
+/*
+ * hyperdimensional — design tokens and layout.
+ * Everything is measured in --u, the logo's own module: the glyph is
+ * 16 modules wide inside an 18-module disc, so at --u: 8px the mark is
+ * exactly 144px. See docs/design.md.
+ */
+:root {
+  --u: 6px;
+  --bg: #ffffff;
+  --fg: #000000;
+  --muted: #595959;          /* 7.0:1 on white */
+  --sans: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --margin: calc(var(--u) * 3);
+  --rule: calc(var(--u) / 4) solid var(--fg);
+  --measure: 34em;
+  color-scheme: light dark;
+}
+@media (min-width: 40em) {
+  :root { --u: 8px; --margin: calc(var(--u) * 6); }
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #000000;
+    --fg: #ffffff;
+    --muted: #a6a6a6;        /* 8.6:1 on black */
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { background: var(--bg); color: var(--fg); -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  padding: var(--margin);
+  font: 400 1.0625rem/1.55 var(--sans);
+}
+
+/* ── Mark: a disc 18 modules across, on the top-left margin ────────── */
+.mark { display: block; width: calc(var(--u) * 18); height: auto; color: var(--fg); }
+.mark-link { display: inline-block; color: inherit; }
+
+/* ── Hero: the name across the full measure, then the lede ─────────── */
+.hero {
+  margin-block: calc(var(--u) * 12) calc(var(--u) * 12);
+  display: grid;
+  gap: calc(var(--u) * 4);
+}
+.wordmark {
+  margin: 0;
+  /* "hyperdimensional" is ~8.1em wide at this tracking; 8.6 leaves slack
+     for wider fallback fonts. Capped for very wide screens. */
+  font: 700 min(12rem, calc((100vw - 2 * var(--margin)) / 8.6))/1 var(--sans);
+  letter-spacing: -0.045em;
+}
+.lede {
+  margin: 0;
+  max-width: 24em;
+  font-size: clamp(1.375rem, 1rem + 1.5vw, 2.125rem);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+/* ── Practices: two columns from 64em, each opened by a rule ──────── */
+.practices {
+  display: grid;
+  gap: calc(var(--u) * 12) calc(var(--u) * 6);
+}
+@media (min-width: 64em) {
+  .practices { grid-template-columns: 1fr 1fr; }
+}
+.practice { max-width: var(--measure); }
+.practice h2 {
+  margin: 0 0 calc(var(--u) * 3);
+  padding-top: calc(var(--u) * 2);
+  border-top: var(--rule);
+  font: 400 0.875rem/1.5 var(--mono);
+}
+.practice p { margin: 0 0 calc(var(--u) * 2); }
+.aside { color: var(--muted); }
+
+/* ── Work list: name, then what it is ──────────────────────────────── */
+.work {
+  list-style: none;
+  margin: calc(var(--u) * 4) 0 0;
+  padding: 0;
+}
+.work-item {
+  display: grid;
+  gap: calc(var(--u) / 2);
+  padding-block: calc(var(--u) * 2);
+  border-top: 1px solid var(--muted);
+}
+.work-item:last-child { border-bottom: 1px solid var(--muted); }
+.work-item a { font-weight: 700; justify-self: start; }
+.work-item span { color: var(--muted); }
+
+/* ── Footer: provenance and copyright, in mono ─────────────────────── */
+.site-footer {
+  margin-top: calc(var(--u) * 16);
+  padding-top: calc(var(--u) * 2);
+  border-top: var(--rule);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: calc(var(--u) * 2);
+  font: 400 0.875rem/1.5 var(--mono);
+  color: var(--muted);
+}
+.site-footer p { margin: 0; }
+.site-footer time { color: var(--fg); font-variant-numeric: tabular-nums; }
+
+/* ── Links ─────────────────────────────────────────────────────────── */
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+a:hover { text-decoration-thickness: 2px; }
+a:focus-visible { outline: 2px solid var(--fg); outline-offset: 4px; }
