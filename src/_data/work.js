@@ -25,4 +25,10 @@ export default [
     kind: 'place',
     summary: 'The world as a text adventure, written from open data: hygiene ratings, planning applications, bus stops.',
   },
+  {
+    name: 'HUIS CLOS',
+    url: 'https://huisclos.org/',
+    kind: 'place',
+    summary: 'Solo mapping games for phones. No exit, just the map: it asks the questions, and the place you map is seen by no one else.',
+  },
 ];

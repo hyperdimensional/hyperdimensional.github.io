@@ -91,6 +91,7 @@ describe('home page copy', () => {
       ['Tidal Cycles MCP', 'https://github.com/Benedict/tidal-cycles-mcp-server'],
       ['Drift', 'https://drift.place/'],
       ['A Partial Guide', 'https://apartialguide.com/'],
+      ['HUIS CLOS', 'https://huisclos.org/'],
     ]) assert.match(main, new RegExp(`<a href="${href}">${name}</a>`), name);
   });
 
