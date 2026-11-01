@@ -2,51 +2,66 @@
 
 ## 1. Content audit
 
-The site has four facts, and the design shouldn't pretend there are more.
-
 | Rank | Content | Job |
 | --- | --- | --- |
-| 1 | **hyperdimensional**, the name | Identify |
-| 1 | The mark | Identify (visual) |
-| 2 | `established 993914803` | Provenance, as a Unix timestamp (2001-06-30T15:26:43Z), shown undecoded on purpose |
-| 3 | `© MMI–MMXXVI` | Legal and house style (Roman numerals, carried over from the original `© MMXX`) |
+| 1 | **hyperdimensional** and the mark | Identify |
+| 1 | Lede: what the company does, in one sentence | Orient. It names both practices. |
+| 2 | **Delivery**: how we work with organisations whose technology delivery has stalled | Persuade. It's the commercial practice. |
+| 2 | **Creative technology**: performance tools and ways of seeing places | Show. It alludes to the work and links out. |
+| 3 | `established 993914803`, `© MMI–MMXXVI` | Provenance and legal, in house style |
 
-Purpose: identification. Density: as low as it gets. So the design leans on scale,
-position and space rather than on decoration.
+Two practices of equal rank, so they sit side by side on wide screens and
+stack on narrow ones, each opened by the same rule. The lede is the bridge
+between them.
+
+Copy source: the profound.fyi bio, rewritten from one person's career into what
+the company does. Past roles and employers are deliberately *not* claimed as
+company credentials. The project summaries quote or paraphrase each project's
+own description.
 
 ## 2. Systems
 
 ### Module, from the mark
 
-The mark is drawn on a grid. Horizontally its parts measure 24 / 36 / 36 / 72 / 24 px
-in the source artwork: 2 / 3 / 3 / 6 / 2 modules of 12 px, **16 modules** in total.
-
-The site uses that same module as its spacing unit, `--u`:
+The mark is drawn on a grid. Horizontally its parts measure 2 / 3 / 3 / 6 / 2
+modules, **16 modules** in total. The site uses that module as its spacing unit, `--u`.
 
 | Viewport | `--u` | Mark width (16u) | Page margin |
 | --- | --- | --- | --- |
-| < 40em | 6px | 96px | 3u = 18px |
-| ≥ 40em | 8px | 128px | 6u = 48px |
+| < 40em | 6px | 96px | 3u |
+| ≥ 40em | 8px | 128px | 6u |
 
-Every gap in the stylesheet is a multiple of `--u`: section gap 4u, name-to-provenance 3u,
-footer padding 2u, footer rule u/4. So the mark's proportions and the page's are the same.
+Every gap is a multiple of `--u`:
+
+| Gap | Size |
+| --- | --- |
+| Mark → name; hero → practices; between stacked practices | 12u |
+| Name → lede | 4u |
+| Column gutter | 6u |
+| Section heading below its rule | 2u above, 3u below |
+| Paragraphs | 2u |
+| Work items | 2u padding |
+| Footer | 16u above |
+| Heavy rules | u/4 (2px at 8px) |
 
 ### Layout
 
-A three-row grid filling the viewport (`100dvh`): mark at the top, name and provenance
-at the bottom, footer under a rule. The empty middle is deliberate. It is the
-largest element on the page and gives the name its weight. Everything aligns to one
-left edge, the page margin.
+A single left edge (the page margin) for everything. The name fills the full
+measure. The practices form two equal columns from 64em, each capped at 34em
+for comfortable line length. The empty space after the shorter column is left alone.
 
 ### Typography
 
-| Role | Face | Size | Why |
-| --- | --- | --- | --- |
-| Name | Neo-grotesque (Helvetica Neue → Helvetica → Arial), 700, −0.045em tracking | Fills the measure: `(100vw − 2·margin) / 8.6`, max 12rem | A heavy, neutral grotesk echoes the mark's solid black blocks; filling the width makes the name the page's horizon line |
-| Everything else | System monospace, 400, 0.875rem/1.5 | — | The timestamp is machine data; mono says so, and gives tabular digits |
+| Role | Face | Size / leading |
+| --- | --- | --- |
+| Name | Neo-grotesque 700, −0.045em | Fills the measure: `(100vw − 2·margin) / 8.6`, max 12rem / 1 |
+| Lede | Neo-grotesque 400, −0.01em | `clamp(1.375rem, 1rem + 1.5vw, 2.125rem)` / 1.25, max 24em |
+| Body | Neo-grotesque 400 | 1.0625rem / 1.55 |
+| Labels (section headings, footer) | System monospace 400 | 0.875rem / 1.5 |
 
-Two sizes, no more. System fonts only: no font downloads, nothing for the CSP to allow,
-and nothing to slow the first paint.
+Neo-grotesque = Helvetica Neue → Helvetica → Arial → system. The heavy grotesk echoes
+the mark's solid blocks. Monospace marks the "machine" layer: labels and the
+timestamp. System fonts only: no downloads, nothing for the CSP to allow.
 
 ### Colour
 
@@ -57,46 +72,31 @@ Monochrome, matching the mark.
 | `--bg` | #ffffff | #000000 | — |
 | `--fg` | #000000 | #ffffff | 21:1 |
 | `--muted` | #595959 | #a6a6a6 | 7.0:1 / 8.6:1 (AAA) |
-| `--glitch-a` | #e60000 | #ff4d4d | Decorative only |
-| `--glitch-b` | #0033ff | #4d79ff | Decorative only |
 
-The mark uses `currentColor`, so dark mode inverts it (white field, black glyph) with
-no second asset. The red and blue are the original site's glitch fringes, and they never carry
-meaning.
+`--muted` carries secondary text: project summaries, the profound.fyi aside,
+footer labels. The mark uses `currentColor`, so dark mode inverts it with no
+second asset.
 
 ### Motion
 
-The glitch on the name is kept from the original site: two offset copies sliced by
-animated `clip-path`. It is switched off for `prefers-reduced-motion: reduce` and
-`forced-colors: active`. The copies use `content: … / ""` so they stay out of the
-accessible name, and `white-space: nowrap` so multi-word headings don't wrap.
+None. The original glitch effect has been removed.
 
 ## 3. Decisions
 
-- **The timestamp stays a timestamp.** Decoding it into a date on screen would explain
-  the joke away. It is marked up as `<time datetime="2001-06-30T15:26:43Z">`, so machines
-  get the date and people get the puzzle.
-- **Copyright is a range.** `MMI–MMXXVI` runs from the established year to the build year,
-  computed at build time, instead of the stale `MMXX`.
-- **No JavaScript.** Nothing on the page needs it. The CSP forbids scripts outright.
-- **The mark is inlined, not linked.** That gives one fewer request, lets the colour follow
-  the theme, and keeps a single source: the `logo` shortcode reads `src/assets/logo.svg`.
-- **The mark's proportions are kept as drawn.** The source artwork is 192×178, not square:
-  the horizontal bars are 31 px thick, not 36. If that's an export artefact rather than
-  intent, squaring it is a one-line change to the `viewBox` and path.
+- **The timestamp stays a timestamp.** `established 993914803` moves to the footer,
+  marked up as `<time datetime="2001-06-30T15:26:43Z">`, so machines get the date
+  and people get the puzzle.
+- **The work is alluded to, not showcased.** Each project is a name, one line and an
+  outbound link, held in `src/_data/work.js`. If the work grows, it gets its own
+  page; until then a list is honest about the scale.
+- **Copyright is a range**, from the established year to the build year, in Roman
+  numerals, computed at build time.
+- **No JavaScript.** The CSP forbids scripts outright.
+- **The mark's proportions are kept as drawn** (192×178). If the non-square
+  proportion is an export artefact, squaring it is a one-line change.
 
-## 4. Specification
+## 4. Assets
 
-```css
---u: 6px | 8px (≥40em)
---margin: 3u | 6u
-mark: width 16u
-gap (sections): 4u
-gap (name → provenance): 3u
-footer: padding-top 2u, rule u/4
-name: 700, line-height 1, tracking -0.045em, min(12rem, (100vw - 2·margin)/8.6)
-body: 400 0.875rem/1.5 monospace
-```
-
-Share image (`og-image.png`, 1200×630) and touch icon (`apple-touch-icon.png`, 180×180)
-are rendered from the built site and the mark. Regenerate them after design changes.
+The share image (`og-image.png`, 1200×630) is a screenshot of the top of the built home page.
+The touch icon (`apple-touch-icon.png`, 180×180) is the mark, full-bleed. Regenerate both
+after design changes.

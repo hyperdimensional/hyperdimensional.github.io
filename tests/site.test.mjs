@@ -41,9 +41,9 @@ describe('every page', () => {
     test(`${page}: accessibility`, () => {
       assert.equal((html.match(/<h1[\s>]/g) || []).length, 1, 'exactly one h1');
       for (const lm of ['header', 'main', 'footer']) assert.match(html, new RegExp(`<${lm}[\\s>]`), lm);
-      assert.match(html, /prefers-reduced-motion: ?reduce/);
-      assert.match(html, /content: ?attr\(data-text\) ?\/ ?""/, 'glitch copies excluded from accessible name');
-      assert.match(html, /white-space: ?nowrap/, 'glitch copies never wrap');
+      assert.doesNotMatch(html, /glitch|data-text=|@keyframes/, 'no glitch effect');
+      const levels = [...html.matchAll(/<h([1-6])[\s>]/g)].map((m) => +m[1]);
+      levels.forEach((l, i) => i && assert.ok(l <= levels[i - 1] + 1, `heading levels skip: ${levels}`));
       assert.match(html, /<svg[^>]*aria-hidden="true"/, 'inline mark is decorative (name is in the h1)');
       for (const img of html.match(/<img\b[^>]*>/g) || []) assert.match(img, /\balt=/, img);
     });
@@ -66,10 +66,35 @@ describe('home page', () => {
   });
 
   test('content: name, provenance, copyright', () => {
-    assert.match(html, /<h1 class="wordmark[^"]*" data-text="hyperdimensional">hyperdimensional<\/h1>/);
+    assert.match(html, /<h1 class="wordmark">hyperdimensional<\/h1>/);
     assert.match(html, /<time datetime="2001-06-30T15:26:43Z">993914803<\/time>/, 'Unix timestamp as machine-readable date');
     const year = new Date().getUTCFullYear();
     assert.match(html, new RegExp(`© <abbr title="2001–${year}">MMI–[MDCLXVI]+</abbr>`), 'roman-numeral copyright range ending this year');
+  });
+});
+
+describe('home page copy', () => {
+  const html = read('index.html');
+  const main = html.slice(html.indexOf('<main'), html.indexOf('</main>'));
+
+  test('describes both sides of the company', () => {
+    assert.match(main, /<p class="lede">[^<]*delivery[^<]*<\/p>/i, 'lede names delivery');
+    assert.match(main, /<p class="lede">[^<]*perform[^<]*<\/p>/i, 'lede names performance');
+    const h2 = [...main.matchAll(/<h2[^>]*>([^<]+)<\/h2>/g)].map((m) => m[1]);
+    assert.deepEqual(h2, ['Delivery', 'Creative technology']);
+  });
+
+  test('alludes to the work, with links', () => {
+    for (const [name, href] of [
+      ['Padjam', 'https://padjam.app/'],
+      ['Tidal Cycles MCP', 'https://github.com/Benedict/tidal-cycles-mcp-server'],
+      ['Drift', 'https://drift.place/'],
+      ['A Partial Guide', 'https://apartialguide.com/'],
+    ]) assert.match(main, new RegExp(`<a href="${href}">${name}</a>`), name);
+  });
+
+  test('links to the writing', () => {
+    assert.match(html, /<a href="https:\/\/profound\.fyi\/">/);
   });
 });
 

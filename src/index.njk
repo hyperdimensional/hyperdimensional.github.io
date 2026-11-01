@@ -1,5 +1,26 @@
 ---
 layout: layouts/base.njk
 ---
-<h1 class="wordmark glitch" data-text="{{ site.name }}">{{ site.name }}</h1>
-<p class="meta">established <time datetime="{{ site.established | unixToIso }}">{{ site.established }}</time></p>
+<section class="hero">
+<h1 class="wordmark">{{ site.name }}</h1>
+<p class="lede">We help organisations whose technology delivery has stalled, and we make instruments for live performance and new ways of seeing places.</p>
+</section>
+
+<div class="practices">
+<section class="practice" aria-labelledby="delivery">
+<h2 id="delivery">Delivery</h2>
+<p>When delivery is slow or stuck, the cause is rarely where the symptoms show. It might be in how teams are shaped, how decisions get made, or how the organisation is structured.</p>
+<p>We find it, then work inside the organisation to change it through the work itself, not from the sidelines with a report. We work directly with leadership teams in government, financial services, healthcare and large charities.</p>
+<p class="aside">Writing, playbooks and talks on this live at <a href="https://profound.fyi/">profound.fyi</a>.</p>
+</section>
+
+<section class="practice" aria-labelledby="creative">
+<h2 id="creative">Creative technology</h2>
+<p>The same curiosity, pointed somewhere else: software for performing live with sound and image, and for walking through the world differently.</p>
+<ul class="work" role="list">
+{%- for item in work %}
+<li class="work-item work-item--{{ item.kind }}"><a href="{{ item.url }}">{{ item.name }}</a> <span>{{ item.summary }}</span></li>
+{%- endfor %}
+</ul>
+</section>
+</div>

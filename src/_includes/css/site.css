@@ -8,11 +8,11 @@
   --bg: #ffffff;
   --fg: #000000;
   --muted: #595959;          /* 7.0:1 on white */
-  --glitch-a: #e60000;
-  --glitch-b: #0033ff;
   --sans: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", system-ui, sans-serif;
   --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
   --margin: calc(var(--u) * 3);
+  --rule: calc(var(--u) / 4) solid var(--fg);
+  --measure: 34em;
   color-scheme: light dark;
 }
 @media (min-width: 40em) {
@@ -23,144 +23,95 @@
     --bg: #000000;
     --fg: #ffffff;
     --muted: #a6a6a6;        /* 8.6:1 on black */
-    --glitch-a: #ff4d4d;
-    --glitch-b: #4d79ff;
   }
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 
-html { background: var(--bg); color: var(--fg); }
+html { background: var(--bg); color: var(--fg); -webkit-text-size-adjust: 100%; }
 
 body {
   margin: 0;
-  min-height: 100vh;
-  min-height: 100dvh;
   padding: var(--margin);
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  gap: calc(var(--u) * 4);
-  font: 400 0.875rem/1.5 var(--mono);
-  -webkit-text-size-adjust: 100%;
+  font: 400 1.0625rem/1.55 var(--sans);
 }
 
-/* The mark: 16 modules wide, sitting on the top-left margin. */
-.mark {
-  display: block;
-  width: calc(var(--u) * 16);
-  height: auto;
-  color: var(--fg);
-}
+/* ── Mark: 16 modules wide, on the top-left margin ─────────────────── */
+.mark { display: block; width: calc(var(--u) * 16); height: auto; color: var(--fg); }
 .mark-link { display: inline-block; color: inherit; }
 
-/* Main block sits on the bottom of the page: the name is the horizon. */
-main {
-  align-self: end;
+/* ── Hero: the name across the full measure, then the lede ─────────── */
+.hero {
+  margin-block: calc(var(--u) * 12) calc(var(--u) * 12);
   display: grid;
-  gap: calc(var(--u) * 3);
+  gap: calc(var(--u) * 4);
 }
-
 .wordmark {
   margin: 0;
-  /* Fill the measure: "hyperdimensional" is ~8.1em wide at this tracking;
-     8.6 leaves slack for wider fallback fonts. Capped for very wide screens. */
+  /* "hyperdimensional" is ~8.1em wide at this tracking; 8.6 leaves slack
+     for wider fallback fonts. Capped for very wide screens. */
   font: 700 min(12rem, calc((100vw - 2 * var(--margin)) / 8.6))/1 var(--sans);
   letter-spacing: -0.045em;
-  width: max-content;
-  max-width: 100%;
+}
+.lede {
+  margin: 0;
+  max-width: 24em;
+  font-size: clamp(1.375rem, 1rem + 1.5vw, 2.125rem);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
 }
 
-.meta,
-.site-footer p { margin: 0; }
-.meta { color: var(--muted); }
-.meta time { color: var(--fg); font-variant-numeric: tabular-nums; }
-
-.site-footer {
+/* ── Practices: two columns from 64em, each opened by a rule ──────── */
+.practices {
+  display: grid;
+  gap: calc(var(--u) * 12) calc(var(--u) * 6);
+}
+@media (min-width: 64em) {
+  .practices { grid-template-columns: 1fr 1fr; }
+}
+.practice { max-width: var(--measure); }
+.practice h2 {
+  margin: 0 0 calc(var(--u) * 3);
   padding-top: calc(var(--u) * 2);
-  border-top: calc(var(--u) / 4) solid var(--fg);
-  color: var(--muted);
+  border-top: var(--rule);
+  font: 400 0.875rem/1.5 var(--mono);
+}
+.practice p { margin: 0 0 calc(var(--u) * 2); }
+.aside { color: var(--muted); }
+
+/* ── Work list: name, then what it is ──────────────────────────────── */
+.work {
+  list-style: none;
+  margin: calc(var(--u) * 4) 0 0;
+  padding: 0;
+}
+.work-item {
+  display: grid;
+  gap: calc(var(--u) / 2);
+  padding-block: calc(var(--u) * 2);
+  border-top: 1px solid var(--muted);
+}
+.work-item:last-child { border-bottom: 1px solid var(--muted); }
+.work-item a { font-weight: 700; justify-self: start; }
+.work-item span { color: var(--muted); }
+
+/* ── Footer: provenance and copyright, in mono ─────────────────────── */
+.site-footer {
+  margin-top: calc(var(--u) * 16);
+  padding-top: calc(var(--u) * 2);
+  border-top: var(--rule);
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   gap: calc(var(--u) * 2);
+  font: 400 0.875rem/1.5 var(--mono);
+  color: var(--muted);
 }
+.site-footer p { margin: 0; }
+.site-footer time { color: var(--fg); font-variant-numeric: tabular-nums; }
 abbr[title] { text-decoration: none; cursor: help; }
 
+/* ── Links ─────────────────────────────────────────────────────────── */
 a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+a:hover { text-decoration-thickness: 2px; }
 a:focus-visible { outline: 2px solid var(--fg); outline-offset: 4px; }
-
-/*
- * Glitch: two offset copies of the text, sliced by animated clip-paths.
- * The copies are excluded from the accessible name and never wrap.
- */
-.glitch { position: relative; }
-.glitch::before,
-.glitch::after {
-  content: attr(data-text);
-  content: attr(data-text) / "";
-  position: absolute;
-  inset: 0 auto auto 0;
-  white-space: nowrap;
-  color: var(--fg);
-  background: var(--bg);
-  overflow: hidden;
-}
-.glitch::after {
-  left: 2px;
-  text-shadow: -1px 0 var(--glitch-a);
-  animation: noise-anim 2s linear infinite alternate-reverse;
-}
-.glitch::before {
-  left: -2px;
-  text-shadow: 1px 0 var(--glitch-b);
-  animation: noise-anim-2 15s linear infinite alternate-reverse;
-}
-@media (prefers-reduced-motion: reduce), (forced-colors: active) {
-  .glitch::before, .glitch::after { animation: none; display: none; }
-}
-
-@keyframes noise-anim {
-    0% { clip-path: inset(3% 0 79% 0); }
-    5% { clip-path: inset(12% 0 21% 0); }
-   10% { clip-path: inset(70% 0 27% 0); }
-   15% { clip-path: inset(53% 0 26% 0); }
-   20% { clip-path: inset(91% 0 9% 0); }
-   25% { clip-path: inset(47% 0 7% 0); }
-   30% { clip-path: inset(60% 0 41% 0); }
-   35% { clip-path: inset(34% 0 19% 0); }
-   40% { clip-path: inset(39% 0 41% 0); }
-   45% { clip-path: inset(92% 0 3% 0); }
-   50% { clip-path: inset(3% 0 22% 0); }
-   55% { clip-path: inset(94% 0 1% 0); }
-   60% { clip-path: inset(6% 0 60% 0); }
-   65% { clip-path: inset(72% 0 21% 0); }
-   70% { clip-path: inset(71% 0 28% 0); }
-   75% { clip-path: inset(76% 0 1% 0); }
-   80% { clip-path: inset(27% 0 44% 0); }
-   85% { clip-path: inset(29% 0 72% 0); }
-   90% { clip-path: inset(17% 0 42% 0); }
-   95% { clip-path: inset(66% 0 14% 0); }
-    to { clip-path: inset(74% 0 22% 0); }
-}
-@keyframes noise-anim-2 {
-    0% { clip-path: inset(77% 0 22% 0); }
-    5% { clip-path: inset(77% 0 20% 0); }
-   10% { clip-path: inset(81% 0 11% 0); }
-   15% { clip-path: inset(62% 0 10% 0); }
-   20% { clip-path: inset(64% 0 12% 0); }
-   25% { clip-path: inset(25% 0 19% 0); }
-   30% { clip-path: inset(95% 0 2% 0); }
-   35% { clip-path: inset(90% 0 10% 0); }
-   40% { clip-path: inset(71% 0 27% 0); }
-   45% { clip-path: inset(93% 0 2% 0); }
-   50% { clip-path: inset(38% 0 55% 0); }
-   55% { clip-path: inset(30% 0 60% 0); }
-   60% { clip-path: inset(66% 0 28% 0); }
-   65% { clip-path: inset(25% 0 4% 0); }
-   70% { clip-path: inset(71% 0 21% 0); }
-   75% { clip-path: inset(58% 0 4% 0); }
-   80% { clip-path: inset(34% 0 23% 0); }
-   85% { clip-path: inset(19% 0 45% 0); }
-   90% { clip-path: inset(81% 0 3% 0); }
-   95% { clip-path: inset(89% 0 4% 0); }
-    to { clip-path: inset(32% 0 24% 0); }
-}
