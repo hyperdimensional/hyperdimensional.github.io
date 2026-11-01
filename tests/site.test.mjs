@@ -90,7 +90,7 @@ describe('home page copy', () => {
 
   test('describes both sides of the company', () => {
     // The two halves are separate; the lede states both without inventing a link.
-    assert.match(main, /<p class="lede">Technology consulting, and software we make ourselves\.<\/p>/);
+    assert.match(main, /<p class="lede">We help organisations whose technology delivery has stalled\. We also make our own software\.<\/p>/);
     assert.doesNotMatch(html, /instruments for live|ways of seeing|unstick/i, 'old forced-link copy gone');
     const h2 = [...main.matchAll(/<h2[^>]*>([^<]+)<\/h2>/g)].map((m) => m[1]);
     assert.deepEqual(h2, ['Consulting', 'Projects']);
