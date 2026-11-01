@@ -20,7 +20,7 @@ Browser checks need Chromium: `npx playwright install chromium` once.
 | `src/_includes/layouts/base.njk` | The single page shell: head metadata, mark, footer. |
 | `src/_includes/css/site.css` | Design tokens and layout, inlined into every page. |
 | `src/assets/` | Published as-is at the site root (`/logo.svg`, `/favicon.ico`, …). `logo.svg` is also the source for the inline mark. |
-| `src/*.njk` | Pages and site files (`index`, `404`, `sitemap.xml`, `robots.txt`, `CNAME`). |
+| `src/*.njk` | Pages and site files (`index`, `404`, `sitemap.xml`, `robots.txt`, `CNAME`, `favicon.svg`). |
 | `tests/` | `spec` (standards), `content` (copy and legal), `browser` (axe, keyboard, layout) and `live` (production) tests. |
 | `docs/design.md` | Design rationale and specification. |
 | `docs/spec.md` | specification.website coverage: what's tested, what isn't, and why. |

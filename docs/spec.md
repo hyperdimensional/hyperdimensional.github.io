@@ -30,7 +30,7 @@ one-page static site on GitHub Pages, and which test checks each one.
 | One non-empty `<title>` | ✅ | spec: document basics |
 | Meta description | ✅ | spec: SEO |
 | Canonical URL | ✅ | spec: SEO |
-| SVG favicon, `.ico` fallback, apple-touch-icon | ✅ | spec: icons |
+| SVG favicon (adapts to dark tabs), `.ico` fallback, apple-touch-icon | ✅ | spec: icons; spec: favicon visible on dark tabs |
 | Maskable PWA icon | — | Not an installable app, so no manifest |
 | `theme-color` (light and dark), `color-scheme` | ✅ | spec: icons and colour scheme |
 | Open Graph tags | ✅ | spec: SEO |
@@ -69,8 +69,8 @@ one-page static site on GitHub Pages, and which test checks each one.
 | Item | Status | Where |
 | --- | --- | --- |
 | HTTPS for every page | ✅ | live: home page over HTTPS |
-| HTTP redirects to HTTPS | ❌ | live: HTTP redirect. **Fix: Settings → Pages → tick "Enforce HTTPS".** |
-| HSTS | — | GitHub Pages sends HSTS only with Enforce HTTPS, and the site can't set it |
+| HTTP redirects to HTTPS | ✅ | live: HTTP redirect (301). Needs "Enforce HTTPS" in Settings → Pages, which is on. |
+| HSTS | — | GitHub Pages doesn't send it, even with Enforce HTTPS on (checked 2026-11-01), and the site can't set response headers |
 | Content Security Policy | ✅ | spec: CSP via `<meta>` (no scripts, `base-uri` and `form-action` `'none'`); browser: no CSP errors |
 | All subresources same-origin or HTTPS | ✅ | spec: subresources |
 | Referrer-Policy | ✅ | spec: `<meta name="referrer">` |

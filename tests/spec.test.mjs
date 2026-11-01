@@ -21,7 +21,7 @@ describe('Foundations', () => {
     });
 
     test(`${page}: icons and colour scheme`, () => {
-      assert.match(head, /<link rel="icon" href="\/logo\.svg" type="image\/svg\+xml">/, 'SVG favicon');
+      assert.match(head, /<link rel="icon" href="\/favicon\.svg" type="image\/svg\+xml">/, 'SVG favicon');
       assert.match(head, /<link rel="icon" href="\/favicon\.ico" sizes="32x32">/, '.ico fallback');
       assert.match(head, /<link rel="apple-touch-icon" href="\/apple-touch-icon\.png">/);
       assert.match(head, /<meta name="color-scheme" content="light dark">/);
@@ -110,8 +110,14 @@ describe('Resilience', () => {
     assert.match(html, /<a href="\/">/);
   });
 
+  test('SVG favicon stays visible on dark browser tabs', () => {
+    const svg = read('favicon.svg').replace(/\s+/g, ' ');
+    assert.doesNotMatch(svg, /currentColor/, 'currentColor resolves to black in a tab, invisible on dark');
+    assert.match(svg, /@media \(prefers-color-scheme: ?dark\) ?\{[^}]*fill: ?#fff/);
+  });
+
   test('published files exist at the root, CNAME matches SITE_URL', () => {
-    for (const f of ['logo.svg', 'favicon.ico', 'apple-touch-icon.png', 'og-image.png', 'robots.txt', 'sitemap.xml', 'CNAME'])
+    for (const f of ['logo.svg', 'favicon.svg', 'favicon.ico', 'apple-touch-icon.png', 'og-image.png', 'robots.txt', 'sitemap.xml', 'CNAME'])
       assert.ok(exists(f), f);
     assert.equal(read('CNAME').trim(), new URL(ORIGIN).host);
   });

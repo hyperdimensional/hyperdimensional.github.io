@@ -61,6 +61,7 @@ describe('Live site', { skip }, () => {
     ['/robots.txt', /^text\/plain/],
     ['/sitemap.xml', /xml/],
     ['/logo.svg', /^image\/svg\+xml/],
+    ['/favicon.svg', /^image\/svg\+xml/],
     ['/og-image.png', /^image\/png/],
     ['/apple-touch-icon.png', /^image\/png/],
     ['/favicon.ico', /icon/],

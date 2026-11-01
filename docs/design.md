@@ -107,3 +107,7 @@ The share image (`og-image.png`, 1200×630) is a screenshot of the top of the bu
 The touch icon (`apple-touch-icon.png`, 180×180) is the disc on white, 148px across;
 iOS rounds the corners itself. `favicon.ico` (16/32/48px) is rendered from `logo.svg`.
 Regenerate all three after design changes.
+
+`favicon.svg` is built from `logo.svg`'s path data (`src/favicon.svg.njk`), so it never
+drifts. It's black, and white under `prefers-color-scheme: dark`. In a browser tab
+`currentColor` resolves to black, which made the disc vanish on dark tab bars.
