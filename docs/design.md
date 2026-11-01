@@ -5,15 +5,15 @@
 | Rank | Content | Job |
 | --- | --- | --- |
 | 1 | **hyperdimensional** and the mark | Identify |
-| 1 | Lede: what the company does, in one sentence | Orient. It names both practices. |
+| 1 | Lede: what the company does, in two sentences | Orient. It names both practices. |
 | 2 | **Consulting**: how we work with organisations whose technology delivery has stalled | Persuade. It's the commercial practice. |
 | 2 | **Projects**: the things we make, one line each | Show. It links out, with no framing sentence. |
 | 3 | `© 2007–2026 Hyperdimensional Limited` | Copyright, from incorporation |
 | 4 | Company number, jurisdiction, registered office | Legal: required on UK company websites, so shown on every page, smallest type |
 
 Two practices of equal rank, so they sit side by side on wide screens and
-stack on narrow ones, each opened by the same rule. The lede is the bridge
-between them.
+stack on narrow ones, each opened by the same rule. The lede states both in
+two sentences and doesn't invent a link between them.
 
 Copy source: the profound.fyi bio, rewritten from one person's career into what
 the company does. Past roles and employers are deliberately *not* claimed as

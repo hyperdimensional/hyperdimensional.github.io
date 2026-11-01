@@ -16,6 +16,7 @@ layout: layouts/base.njk
 
 <section class="practice" aria-labelledby="projects">
 <h2 id="projects">Projects</h2>
+<!-- [html-validate-disable-next no-redundant-role: VoiceOver drops list semantics when list-style is none] -->
 <ul class="work" role="list">
 {%- for item in work %}
 <li class="work-item work-item--{{ item.kind }}"><a href="{{ item.url }}">{{ item.name }}</a> <span>{{ item.summary }}</span></li>
