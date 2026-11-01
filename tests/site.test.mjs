@@ -116,6 +116,12 @@ describe('site files', () => {
     assert.match(xml, new RegExp(`<loc>${ORIGIN}/</loc>`));
     assert.doesNotMatch(xml, /404/);
   });
+  test('the mark is circular: a 216-unit disc (18 glyph modules) with the glyph centred', () => {
+    const svg = read('logo.svg').replace(/\s+/g, ' ');
+    assert.match(svg, /viewBox="0 0 216 216"/);
+    assert.match(svg, /d=" ?M108 0A108 108 0 1 1 108 216A108 108 0 1 1 108 0Z/, 'disc outline');
+    assert.match(svg, /M72 43H180V74H108V142H180V173H36V142H72Z/, 'glyph, shifted by (12, 19) to centre it');
+  });
   test('static assets are published at the root', () => {
     for (const f of ['logo.svg', 'favicon.ico', 'apple-touch-icon.png', 'og-image.png', 'CNAME'])
       assert.ok(existsSync(join(out, f)), f);

@@ -23,13 +23,17 @@ own description.
 
 ### Module, from the mark
 
-The mark is drawn on a grid. Horizontally its parts measure 2 / 3 / 3 / 6 / 2
-modules, **16 modules** in total. The site uses that module as its spacing unit, `--u`.
+The mark is a black disc with the glyph cut out of it. The glyph is drawn on a grid:
+horizontally its parts measure 3 / 3 / 6 modules, 12 modules wide, and the original square
+mark added 2 modules either side for **16 modules**. The disc is **18 modules** across
+(216 units). That's the smallest whole number of modules that clears the glyph's corners
+(97 units from its centre) with room to spare. The site uses that module as its spacing
+unit, `--u`.
 
-| Viewport | `--u` | Mark width (16u) | Page margin |
+| Viewport | `--u` | Mark width (18u) | Page margin |
 | --- | --- | --- | --- |
-| < 40em | 6px | 96px | 3u |
-| ≥ 40em | 8px | 128px | 6u |
+| < 40em | 6px | 108px | 3u |
+| ≥ 40em | 8px | 144px | 6u |
 
 Every gap is a multiple of `--u`:
 
@@ -92,11 +96,14 @@ None. The original glitch effect has been removed.
 - **Copyright is a range**, from the established year to the build year, computed at
   build time. Plain years, not Roman numerals: they read at a glance.
 - **No JavaScript.** The CSP forbids scripts outright.
-- **The mark's proportions are kept as drawn** (192×178). If the non-square
-  proportion is an export artefact, squaring it is a one-line change.
+- **The mark is a circle.** The glyph is unchanged from the original artwork, and
+  its pixels match it exactly. Only its container changed: the 192×178 square
+  became a 216-unit disc, with the glyph centred inside it. The glyph's thinner
+  horizontal bars (31 units, not 36) are kept as drawn.
 
 ## 4. Assets
 
 The share image (`og-image.png`, 1200×630) is a screenshot of the top of the built home page.
-The touch icon (`apple-touch-icon.png`, 180×180) is the mark, full-bleed. Regenerate both
-after design changes.
+The touch icon (`apple-touch-icon.png`, 180×180) is the disc on white, 148px across;
+iOS rounds the corners itself. `favicon.ico` (16/32/48px) is rendered from `logo.svg`.
+Regenerate all three after design changes.

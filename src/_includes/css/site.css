@@ -1,7 +1,8 @@
 /*
  * hyperdimensional — design tokens and layout.
- * Everything is measured in --u, the logo's own module: the mark is
- * 16 modules wide, so at --u: 8px it is exactly 128px. See docs/design.md.
+ * Everything is measured in --u, the logo's own module: the glyph is
+ * 16 modules wide inside an 18-module disc, so at --u: 8px the mark is
+ * exactly 144px. See docs/design.md.
  */
 :root {
   --u: 6px;
@@ -36,8 +37,8 @@ body {
   font: 400 1.0625rem/1.55 var(--sans);
 }
 
-/* ── Mark: 16 modules wide, on the top-left margin ─────────────────── */
-.mark { display: block; width: calc(var(--u) * 16); height: auto; color: var(--fg); }
+/* ── Mark: a disc 18 modules across, on the top-left margin ────────── */
+.mark { display: block; width: calc(var(--u) * 18); height: auto; color: var(--fg); }
 .mark-link { display: inline-block; color: inherit; }
 
 /* ── Hero: the name across the full measure, then the lede ─────────── */
