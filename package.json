@@ -1,0 +1,15 @@
+{
+  "name": "hyperdimensional.net",
+  "private": true,
+  "type": "module",
+  "description": "Source for www.hyperdimensional.net, built with Eleventy",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "build": "eleventy",
+    "start": "eleventy --serve",
+    "test": "eleventy --quiet && node --test tests/*.test.mjs"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "3.1.7"
+  }
+}
