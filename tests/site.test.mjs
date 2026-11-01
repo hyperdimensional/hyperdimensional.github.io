@@ -89,8 +89,9 @@ describe('home page copy', () => {
   const main = html.slice(html.indexOf('<main'), html.indexOf('</main>'));
 
   test('describes both sides of the company', () => {
-    assert.match(main, /<p class="lede">[^<]*delivery[^<]*<\/p>/i, 'lede names delivery');
-    assert.match(main, /<p class="lede">[^<]*perform[^<]*<\/p>/i, 'lede names performance');
+    // The two halves are separate; the lede states both without inventing a link.
+    assert.match(main, /<p class="lede">Technology consulting, and software we make ourselves\.<\/p>/);
+    assert.doesNotMatch(html, /instruments for live|ways of seeing|unstick/i, 'old forced-link copy gone');
     const h2 = [...main.matchAll(/<h2[^>]*>([^<]+)<\/h2>/g)].map((m) => m[1]);
     assert.deepEqual(h2, ['Consulting', 'Projects']);
     assert.doesNotMatch(main, /same curiosity/i, 'no filler intro to the projects');

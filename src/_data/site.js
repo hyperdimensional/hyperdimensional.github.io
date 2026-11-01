@@ -4,7 +4,7 @@ export default {
   name: 'hyperdimensional',
   url: (process.env.SITE_URL ?? 'https://www.hyperdimensional.net').replace(/\/$/, ''),
   lang: 'en',
-  description: 'hyperdimensional helps organisations unstick technology delivery, and makes creative technology for live performance and for exploring places.',
+  description: 'Hyperdimensional Limited: technology consulting, and software we make ourselves.',
   // Legal entity, as registered at Companies House. Shown in every page footer
   // (UK Company, LLP and Business (Names and Trading Disclosures) Regulations 2015).
   company: {

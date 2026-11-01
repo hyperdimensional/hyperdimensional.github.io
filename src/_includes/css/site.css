@@ -60,6 +60,7 @@ body {
   font-size: clamp(1.375rem, 1rem + 1.5vw, 2.125rem);
   line-height: 1.25;
   letter-spacing: -0.01em;
+  text-wrap: balance;
 }
 
 /* ── Practices: two columns from 64em, each opened by a rule ──────── */
