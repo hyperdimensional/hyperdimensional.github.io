@@ -33,6 +33,15 @@ describe('every page', () => {
       assert.match(head, /<link rel="apple-touch-icon" href="\/apple-touch-icon\.png">/);
     });
 
+    test(`${page}: company disclosures in the footer (UK trading disclosure rules)`, () => {
+      const footer = html.slice(html.indexOf('<footer'), html.indexOf('</footer>'));
+      const year = new Date().getUTCFullYear();
+      assert.match(footer, new RegExp(`© 2001–${year} Hyperdimensional Limited`));
+      assert.match(footer, /Registered in England and Wales/);
+      assert.match(footer, /Company number 06255378/);
+      assert.match(footer, /<address[^>]*>Registered office: Kemp House, 152-160 City Road, London, EC1V 2NX<\/address>/);
+    });
+
     test(`${page}: no JavaScript, restrictive CSP`, () => {
       assert.doesNotMatch(html, /<script(?![^>]*application\/ld\+json)/);
       assert.match(head, /http-equiv="Content-Security-Policy" content="[^"]*default-src 'none'[^"]*script-src 'none'/);
@@ -63,13 +72,16 @@ describe('home page', () => {
     assert.equal(ld['@type'], 'Organization');
     assert.equal(ld.url, `${ORIGIN}/`);
     assert.equal(ld.foundingDate, '2001-06-30');
+    assert.equal(ld.legalName, 'Hyperdimensional Limited');
+    assert.equal(ld.identifier, '06255378');
+    assert.equal(ld.address?.postalCode, 'EC1V 2NX');
   });
 
   test('content: name, provenance, copyright', () => {
     assert.match(html, /<h1 class="wordmark">hyperdimensional<\/h1>/);
     assert.match(html, /<time datetime="2001-06-30T15:26:43Z">993914803<\/time>/, 'Unix timestamp as machine-readable date');
     const year = new Date().getUTCFullYear();
-    assert.match(html, new RegExp(`<p>© 2001–${year}</p>`), 'copyright range in plain years, ending this year');
+
     assert.doesNotMatch(html, /\b[MDCLXVI]{3,}\b/, 'no Roman numerals');
   });
 });

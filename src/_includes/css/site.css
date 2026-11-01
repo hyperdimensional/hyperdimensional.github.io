@@ -101,14 +101,18 @@ body {
   margin-top: calc(var(--u) * 16);
   padding-top: calc(var(--u) * 2);
   border-top: var(--rule);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: calc(var(--u) * 2);
+  display: grid;
+  gap: var(--u) calc(var(--u) * 2);
   font: 400 0.875rem/1.5 var(--mono);
   color: var(--muted);
 }
-.site-footer p { margin: 0; }
+.site-footer p,
+.site-footer address { margin: 0; font-style: normal; }
+@media (min-width: 40em) {
+  .site-footer { grid-template-columns: 1fr auto; }
+}
+/* Company disclosures span the footer, under provenance and copyright */
+.site-footer .legal { grid-column: 1 / -1; margin-top: calc(var(--u) * 2); font-size: 0.75rem; }
 .site-footer time { color: var(--fg); font-variant-numeric: tabular-nums; }
 
 /* ── Links ─────────────────────────────────────────────────────────── */

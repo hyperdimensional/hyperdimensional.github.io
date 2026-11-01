@@ -23,7 +23,7 @@
 <meta property="og:image:alt" content="The hyperdimensional mark and name">
 {%- endif %}
 {%- if isHome %}
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"{{ site.name }}","url":"{{ site.url }}/","logo":"{{ site.url }}/logo.svg","foundingDate":"{{ site.established | unixToDate }}"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"{{ site.name }}","url":"{{ site.url }}/","logo":"{{ site.url }}/logo.svg","foundingDate":"{{ site.established | unixToDate }}","legalName":"{{ site.company.legalName }}","identifier":"{{ site.company.number }}","address":{"@type":"PostalAddress","streetAddress":"{{ site.company.registeredOffice.street }}","addressLocality":"{{ site.company.registeredOffice.locality }}","postalCode":"{{ site.company.registeredOffice.postalCode }}","addressCountry":"{{ site.company.registeredOffice.country }}"}}</script>
 {%- endif %}
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
@@ -49,7 +49,12 @@
 <footer class="site-footer">
 {%- set since = site.established | unixToYear %}
 <p>established <time datetime="{{ site.established | unixToIso }}">{{ site.established }}</time></p>
-<p>© {{ since }}–{{ build.year }}</p>
+<p>© {{ since }}–{{ build.year }} {{ site.company.legalName }}</p>
+{%- set ro = site.company.registeredOffice %}
+<div class="legal">
+<p>Registered in {{ site.company.jurisdiction }}. Company number {{ site.company.number }}.</p>
+<address>Registered office: {{ ro.street }}, {{ ro.locality }}, {{ ro.postalCode }}</address>
+</div>
 </footer>
 </body>
 </html>

@@ -12,7 +12,7 @@ npm test      # build to _site/ and run the acceptance tests
 
 | Path | What it is |
 | --- | --- |
-| `src/_data/site.js` | Name, URL, description, established timestamp. The only place to change site facts. |
+| `src/_data/site.js` | Name, URL, description, established timestamp, and company details from Companies House. The only place to change site facts. |
 | `src/_includes/layouts/base.njk` | The single page shell: head metadata, mark, footer. |
 | `src/_includes/css/site.css` | Design tokens and layout, inlined into every page. |
 | `src/assets/` | Published as-is at the site root (`/logo.svg`, `/favicon.ico`, …). `logo.svg` is also the source for the inline mark. |

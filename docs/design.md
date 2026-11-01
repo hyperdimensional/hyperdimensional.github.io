@@ -8,7 +8,8 @@
 | 1 | Lede: what the company does, in one sentence | Orient. It names both practices. |
 | 2 | **Delivery**: how we work with organisations whose technology delivery has stalled | Persuade. It's the commercial practice. |
 | 2 | **Creative technology**: performance tools and ways of seeing places | Show. It alludes to the work and links out. |
-| 3 | `established 993914803`, `© 2001–2026` | Provenance and legal |
+| 3 | `established 993914803`, `© 2001–2026 Hyperdimensional Limited` | Provenance and copyright |
+| 4 | Company number, jurisdiction, registered office | Legal: required on UK company websites, so shown on every page, smallest type |
 
 Two practices of equal rank, so they sit side by side on wide screens and
 stack on narrow ones, each opened by the same rule. The lede is the bridge
