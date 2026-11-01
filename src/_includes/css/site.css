@@ -60,6 +60,7 @@ body {
   font-size: clamp(1.375rem, 1rem + 1.5vw, 2.125rem);
   line-height: 1.25;
   letter-spacing: -0.01em;
+  text-wrap: balance;
 }
 
 /* ── Practices: two columns from 64em, each opened by a rule ──────── */
@@ -75,7 +76,8 @@ body {
   margin: 0 0 calc(var(--u) * 3);
   padding-top: calc(var(--u) * 2);
   border-top: var(--rule);
-  font: 400 0.875rem/1.5 var(--mono);
+  font: 700 1.375rem/1.25 var(--sans);
+  letter-spacing: -0.01em;
 }
 .practice p { margin: 0 0 calc(var(--u) * 2); }
 .aside { color: var(--muted); }
@@ -83,7 +85,7 @@ body {
 /* ── Work list: name, then what it is ──────────────────────────────── */
 .work {
   list-style: none;
-  margin: calc(var(--u) * 4) 0 0;
+  margin: 0;
   padding: 0;
 }
 .work-item {
@@ -101,15 +103,15 @@ body {
   margin-top: calc(var(--u) * 16);
   padding-top: calc(var(--u) * 2);
   border-top: var(--rule);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
   gap: calc(var(--u) * 2);
   font: 400 0.875rem/1.5 var(--mono);
   color: var(--muted);
 }
-.site-footer p { margin: 0; }
-.site-footer time { color: var(--fg); font-variant-numeric: tabular-nums; }
+.site-footer p,
+.site-footer address { margin: 0; font-style: normal; }
+/* Company disclosures, under the copyright line */
+.site-footer .legal { font-size: 0.75rem; }
 
 /* ── Links ─────────────────────────────────────────────────────────── */
 a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }

@@ -6,9 +6,10 @@
 | --- | --- | --- |
 | 1 | **hyperdimensional** and the mark | Identify |
 | 1 | Lede: what the company does, in one sentence | Orient. It names both practices. |
-| 2 | **Delivery**: how we work with organisations whose technology delivery has stalled | Persuade. It's the commercial practice. |
-| 2 | **Creative technology**: performance tools and ways of seeing places | Show. It alludes to the work and links out. |
-| 3 | `established 993914803`, `© 2001–2026` | Provenance and legal |
+| 2 | **Consulting**: how we work with organisations whose technology delivery has stalled | Persuade. It's the commercial practice. |
+| 2 | **Projects**: the things we make, one line each | Show. It links out, with no framing sentence. |
+| 3 | `© 2007–2026 Hyperdimensional Limited` | Copyright, from incorporation |
+| 4 | Company number, jurisdiction, registered office | Legal: required on UK company websites, so shown on every page, smallest type |
 
 Two practices of equal rank, so they sit side by side on wide screens and
 stack on narrow ones, each opened by the same rule. The lede is the bridge
@@ -61,11 +62,11 @@ for comfortable line length. The empty space after the shorter column is left al
 | Name | Neo-grotesque 700, −0.045em | Fills the measure: `(100vw − 2·margin) / 8.6`, max 12rem / 1 |
 | Lede | Neo-grotesque 400, −0.01em | `clamp(1.375rem, 1rem + 1.5vw, 2.125rem)` / 1.25, max 24em |
 | Body | Neo-grotesque 400 | 1.0625rem / 1.55 |
-| Labels (section headings, footer) | System monospace 400 | 0.875rem / 1.5 |
+| Section headings | Neo-grotesque 700, −0.01em | 1.375rem / 1.25 |
+| Footer | System monospace 400 | 0.875rem / 1.5 (legal lines 0.75rem) |
 
 Neo-grotesque = Helvetica Neue → Helvetica → Arial → system. The heavy grotesk echoes
-the mark's solid blocks. Monospace marks the "machine" layer: labels and the
-timestamp. System fonts only: no downloads, nothing for the CSP to allow.
+the mark's solid blocks. Monospace is kept for the footer: copyright and company details. System fonts only: no downloads, nothing for the CSP to allow.
 
 ### Colour
 
@@ -87,13 +88,12 @@ None. The original glitch effect has been removed.
 
 ## 3. Decisions
 
-- **The timestamp stays a timestamp.** `established 993914803` moves to the footer,
-  marked up as `<time datetime="2001-06-30T15:26:43Z">`, so machines get the date
-  and people get the puzzle.
+- **No "established" line.** The old `established 993914803` timestamp is gone.
+  Dates now come from the company's incorporation (22 May 2007).
 - **The work is alluded to, not showcased.** Each project is a name, one line and an
   outbound link, held in `src/_data/work.js`. If the work grows, it gets its own
   page; until then a list is honest about the scale.
-- **Copyright is a range**, from the established year to the build year, computed at
+- **Copyright is a range**, from the incorporation year to the build year, computed at
   build time. Plain years, not Roman numerals: they read at a glance.
 - **No JavaScript.** The CSP forbids scripts outright.
 - **The mark is a circle.** The glyph is unchanged from the original artwork, and

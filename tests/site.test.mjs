@@ -33,6 +33,15 @@ describe('every page', () => {
       assert.match(head, /<link rel="apple-touch-icon" href="\/apple-touch-icon\.png">/);
     });
 
+    test(`${page}: company disclosures in the footer (UK trading disclosure rules)`, () => {
+      const footer = html.slice(html.indexOf('<footer'), html.indexOf('</footer>'));
+      const year = new Date().getUTCFullYear();
+      assert.match(footer, new RegExp(`© 2007–${year} Hyperdimensional Limited`));
+      assert.match(footer, /Registered in England and Wales/);
+      assert.match(footer, /Company number 06255378/);
+      assert.match(footer, /<address[^>]*>Registered office: Kemp House, 152-160 City Road, London, EC1V 2NX<\/address>/);
+    });
+
     test(`${page}: no JavaScript, restrictive CSP`, () => {
       assert.doesNotMatch(html, /<script(?![^>]*application\/ld\+json)/);
       assert.match(head, /http-equiv="Content-Security-Policy" content="[^"]*default-src 'none'[^"]*script-src 'none'/);
@@ -62,14 +71,15 @@ describe('home page', () => {
     const ld = JSON.parse(head.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)[1]);
     assert.equal(ld['@type'], 'Organization');
     assert.equal(ld.url, `${ORIGIN}/`);
-    assert.equal(ld.foundingDate, '2001-06-30');
+    assert.equal(ld.foundingDate, '2007-05-22', 'incorporation date at Companies House');
+    assert.equal(ld.legalName, 'Hyperdimensional Limited');
+    assert.equal(ld.identifier, '06255378');
+    assert.equal(ld.address?.postalCode, 'EC1V 2NX');
   });
 
-  test('content: name, provenance, copyright', () => {
+  test('content: name and copyright, no established line', () => {
     assert.match(html, /<h1 class="wordmark">hyperdimensional<\/h1>/);
-    assert.match(html, /<time datetime="2001-06-30T15:26:43Z">993914803<\/time>/, 'Unix timestamp as machine-readable date');
-    const year = new Date().getUTCFullYear();
-    assert.match(html, new RegExp(`<p>© 2001–${year}</p>`), 'copyright range in plain years, ending this year');
+    assert.doesNotMatch(html, /established|993914803/i, 'established timestamp removed');
     assert.doesNotMatch(html, /\b[MDCLXVI]{3,}\b/, 'no Roman numerals');
   });
 });
@@ -79,10 +89,12 @@ describe('home page copy', () => {
   const main = html.slice(html.indexOf('<main'), html.indexOf('</main>'));
 
   test('describes both sides of the company', () => {
-    assert.match(main, /<p class="lede">[^<]*delivery[^<]*<\/p>/i, 'lede names delivery');
-    assert.match(main, /<p class="lede">[^<]*perform[^<]*<\/p>/i, 'lede names performance');
+    // The two halves are separate; the lede states both without inventing a link.
+    assert.match(main, /<p class="lede">Technology consulting, and software we make ourselves\.<\/p>/);
+    assert.doesNotMatch(html, /instruments for live|ways of seeing|unstick/i, 'old forced-link copy gone');
     const h2 = [...main.matchAll(/<h2[^>]*>([^<]+)<\/h2>/g)].map((m) => m[1]);
-    assert.deepEqual(h2, ['Delivery', 'Creative technology']);
+    assert.deepEqual(h2, ['Consulting', 'Projects']);
+    assert.doesNotMatch(main, /same curiosity/i, 'no filler intro to the projects');
   });
 
   test('alludes to the work, with links', () => {
