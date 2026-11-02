@@ -25,6 +25,12 @@ export default [
     summary: 'Play video like an instrument: a pad controller or keyboard becomes a live video sampler for the projector.',
   },
   {
+    name: 'THROUGHLINE',
+    url: 'https://throughline.fyi/',
+    kind: 'tool',
+    summary: 'Pocket value stream mapping: map a process on your phone, see waste, find bottlenecks and track improvements.',
+  },
+  {
     name: 'Tidal Cycles MCP',
     url: 'https://github.com/Benedict/tidal-cycles-mcp-server',
     kind: 'performance',
