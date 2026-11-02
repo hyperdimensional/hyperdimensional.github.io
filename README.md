@@ -16,11 +16,11 @@ Browser checks need Chromium: `npx playwright install chromium` once.
 
 | Path | What it is |
 | --- | --- |
-| `src/_data/site.js` | Name, URL, description, and company details from Companies House. The only place to change site facts. |
+| `src/_data/site.js` | Name, URL, description, contact addresses, and company details from Companies House. The only place to change site facts. |
 | `src/_includes/layouts/base.njk` | The single page shell: head metadata, mark, footer. |
 | `src/_includes/css/site.css` | Design tokens and layout, inlined into every page. |
 | `src/assets/` | Published as-is at the site root (`/logo.svg`, `/favicon.ico`, …). `logo.svg` is also the source for the inline mark. |
-| `src/*.njk` | Pages and site files (`index`, `privacy`, `404`, `sitemap.xml`, `robots.txt`, `CNAME`, `favicon.svg`). |
+| `src/*.njk` | Pages and site files (`index`, `privacy`, `404`, `sitemap.xml`, `robots.txt`, `CNAME`, `favicon.svg`, `.well-known/security.txt`). |
 | `tests/` | `spec` (standards), `content` (copy and legal), `browser` (axe, keyboard, layout) and `live` (production) tests. |
 | `docs/design.md` | Design rationale and specification. |
 | `docs/spec.md` | specification.website coverage: what's tested, what isn't, and why. |
@@ -33,8 +33,9 @@ Browser checks need Chromium: `npx playwright install chromium` once.
 
 ## Deployment
 
-Every push to `master` runs `.github/workflows/pages.yml`: install, build, test, deploy
-`_site/` to GitHub Pages, then `verify`. The verify job waits until the live site serves this
+Every push to `master`, and a scheduled rebuild on the 1st of each month, runs
+`.github/workflows/pages.yml`: install, build, test, deploy `_site/` to GitHub Pages, then `verify`.
+The monthly rebuild keeps the copyright year and `security.txt`'s `Expires` current. The verify job waits until the live site serves this
 commit, then runs `npm run test:live`. Pull requests build and test only.
 
 One-time setup, both in **Settings → Pages**:

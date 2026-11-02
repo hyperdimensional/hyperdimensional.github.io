@@ -116,6 +116,25 @@ describe('Privacy', () => {
   });
 });
 
+describe('security.txt (RFC 9116)', () => {
+  const txt = exists('.well-known/security.txt') ? read('.well-known/security.txt') : '';
+
+  test('is published at /.well-known/security.txt', () => assert.ok(txt, 'missing'));
+
+  test('has a Contact and a canonical URL', () => {
+    assert.match(txt, /^Contact: mailto:security@hyperdimensional\.net$/m);
+    assert.match(txt, new RegExp(`^Canonical: ${ORIGIN}/\\.well-known/security\\.txt$`, 'm'));
+    assert.match(txt, /^Preferred-Languages: en$/m);
+  });
+
+  test('Expires is in the future and less than a year away', () => {
+    const m = txt.match(/^Expires: (\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)$/m);
+    assert.ok(m, 'Expires missing or not ISO 8601 UTC');
+    const days = (Date.parse(m[1]) - Date.now()) / 86400000;
+    assert.ok(days > 300 && days < 365, `Expires is ${days.toFixed(0)} days away`);
+  });
+});
+
 describe('Resilience', () => {
   test('404 page is noindex and links home', () => {
     const html = read('404.html');

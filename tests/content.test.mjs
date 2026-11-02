@@ -15,6 +15,11 @@ describe('Legal (UK company website disclosures)', () => {
       assert.match(footer, /Company number 06255378/);
       assert.match(footer, /<address[^>]*>Registered office: Kemp House, 152-160 City Road, London, EC1V 2NX<\/address>/);
     });
+
+    test(`${page}: footer gives the general contact address`, () => {
+      const footer = between(read(page), '<footer', '</footer>');
+      assert.match(footer, /<a href="mailto:hello@hyperdimensional\.net">hello@hyperdimensional\.net<\/a>/);
+    });
   }
 
   test('JSON-LD carries the legal entity', () => {
@@ -23,6 +28,7 @@ describe('Legal (UK company website disclosures)', () => {
     assert.equal(ld.identifier, '06255378');
     assert.equal(ld.foundingDate, '2007-05-22', 'incorporation date at Companies House');
     assert.equal(ld.address?.postalCode, 'EC1V 2NX');
+    assert.equal(ld.email, 'hello@hyperdimensional.net');
   });
 });
 
@@ -66,6 +72,7 @@ describe('Privacy notice', () => {
   const main = between(html, '<main', '</main>');
 
   test('names the controller and how to reach it', () => {
+    assert.match(main, /<a href="mailto:privacy@hyperdimensional\.net">privacy@hyperdimensional\.net<\/a>/);
     assert.match(main, /Hyperdimensional Limited/);
     assert.match(main, /06255378/);
     assert.match(main, /Kemp House, 152-160 City Road, London, EC1V 2NX/);

@@ -35,7 +35,13 @@ export default function (eleventyConfig) {
   eleventyConfig.addShortcode('logo', logo);
   eleventyConfig.addShortcode('logoPath', logoPath);
 
-  eleventyConfig.addGlobalData('build', { year: new Date().getUTCFullYear() });
+  const now = new Date();
+  eleventyConfig.addGlobalData('build', {
+    year: now.getUTCFullYear(),
+    // security.txt Expires must be under a year ahead (RFC 9116 §2.5.5);
+    // the scheduled monthly rebuild keeps it fresh.
+    securityTxtExpires: new Date(now.getTime() + 360 * 86400000).toISOString().replace(/\.\d{3}Z$/, 'Z'),
+  });
 }
 
 export const config = {

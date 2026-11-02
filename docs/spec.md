@@ -75,7 +75,7 @@ one-page static site on GitHub Pages, and which test checks each one.
 | All subresources same-origin or HTTPS | ✅ | spec: subresources |
 | Referrer-Policy | ✅ | spec: `<meta name="referrer">` |
 | `frame-ancestors`, Permissions-Policy, COOP/COEP/CORP, `nosniff` | — | Must be sent as HTTP headers, which GitHub Pages can't set. Would need a CDN or proxy in front. |
-| `/.well-known/security.txt` | ⚠️ | Not published. It needs a public security contact; decide which address to use. |
+| `/.well-known/security.txt` | ✅ | Contact `security@`, Expires 360 days after each build (a monthly scheduled rebuild keeps it fresh), Canonical, Preferred-Languages. spec: security.txt; live: served as text/plain. |
 | SRI for third-party assets | — | No third-party assets |
 
 ## Performance
