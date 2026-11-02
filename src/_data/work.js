@@ -13,7 +13,7 @@ export default [
     summary: 'A psychogeography walking app for seeing familiar streets with fresh eyes.',
   },
   {
-    name: 'HUIS CLOS',
+    name: 'Huis Clos',
     url: 'https://huisclos.org/',
     kind: 'place',
     summary: 'Solo mapping games for phones. No exit, just the map: it asks the questions, and the place you map is seen by no one else.',
@@ -23,6 +23,12 @@ export default [
     url: 'https://padjam.app/',
     kind: 'performance',
     summary: 'Play video like an instrument: a pad controller or keyboard becomes a live video sampler for the projector.',
+  },
+  {
+    name: 'Throughline Pocket VSM',
+    url: 'https://throughline.fyi/',
+    kind: 'tool',
+    summary: 'Value stream mapping on your phone: see waste, find bottlenecks and track improvements.',
   },
   {
     name: 'Tidal Cycles MCP',

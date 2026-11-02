@@ -50,8 +50,9 @@ describe('Home page copy', () => {
     const projects = [
       ['A Partial Guide', 'https://apartialguide.com/'],
       ['Drift', 'https://drift.place/'],
-      ['HUIS CLOS', 'https://huisclos.org/'],
+      ['Huis Clos', 'https://huisclos.org/'],
       ['Padjam', 'https://padjam.app/'],
+      ['Throughline Pocket VSM', 'https://throughline.fyi/'],
       ['Tidal Cycles MCP', 'https://github.com/Benedict/tidal-cycles-mcp-server'],
     ];
     for (const [name, href] of projects) assert.match(main, new RegExp(`<a href="${href}">${name}</a>`), name);
