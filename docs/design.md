@@ -5,15 +5,15 @@
 | Rank | Content | Job |
 | --- | --- | --- |
 | 1 | **hyperdimensional** and the mark | Identify |
-| 1 | Lede: what the company does, in one sentence | Orient. It names both practices. |
+| 1 | Lede: what the company does, in two sentences | Orient. It names both practices. |
 | 2 | **Consulting**: how we work with organisations whose technology delivery has stalled | Persuade. It's the commercial practice. |
 | 2 | **Projects**: the things we make, one line each | Show. It links out, with no framing sentence. |
 | 3 | `© 2007–2026 Hyperdimensional Limited` | Copyright, from incorporation |
 | 4 | Company number, jurisdiction, registered office | Legal: required on UK company websites, so shown on every page, smallest type |
 
 Two practices of equal rank, so they sit side by side on wide screens and
-stack on narrow ones, each opened by the same rule. The lede is the bridge
-between them.
+stack on narrow ones, each opened by the same rule. The lede states both in
+two sentences and doesn't invent a link between them.
 
 Copy source: the profound.fyi bio, rewritten from one person's career into what
 the company does. Past roles and employers are deliberately *not* claimed as
@@ -107,3 +107,7 @@ The share image (`og-image.png`, 1200×630) is a screenshot of the top of the bu
 The touch icon (`apple-touch-icon.png`, 180×180) is the disc on white, 148px across;
 iOS rounds the corners itself. `favicon.ico` (16/32/48px) is rendered from `logo.svg`.
 Regenerate all three after design changes.
+
+`favicon.svg` is built from `logo.svg`'s path data (`src/favicon.svg.njk`), so it never
+drifts. It's black, and white under `prefers-color-scheme: dark`. In a browser tab
+`currentColor` resolves to black, which made the disc vanish on dark tab bars.

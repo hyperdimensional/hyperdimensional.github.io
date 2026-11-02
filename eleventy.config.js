@@ -16,12 +16,20 @@ export function logo(className = 'mark') {
     .trim();
 }
 
+/** The mark's path data, for other renderings of it (e.g. the favicon). */
+export function logoPath() {
+  const d = readFileSync(LOGO_SOURCE, 'utf8').match(/\sd="([^"]+)"/s);
+  if (!d) throw new Error(`no path data in ${LOGO_SOURCE}`);
+  return d[1].replace(/\s+/g, ' ').trim();
+}
+
 export default function (eleventyConfig) {
   // Files in src/assets are published at the site root (/logo.svg, /favicon.ico …)
   eleventyConfig.addPassthroughCopy({ 'src/assets': '/' });
 
   eleventyConfig.addFilter('host', (url) => new URL(url).host);
   eleventyConfig.addShortcode('logo', logo);
+  eleventyConfig.addShortcode('logoPath', logoPath);
 
   eleventyConfig.addGlobalData('build', { year: new Date().getUTCFullYear() });
 }

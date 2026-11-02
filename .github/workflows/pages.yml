@@ -1,4 +1,4 @@
-# Build with Eleventy, run the acceptance tests, deploy to GitHub Pages.
+# Build with Eleventy, run the tests, deploy to GitHub Pages, then verify the live site.
 # Requires: repo Settings → Pages → Source = "GitHub Actions".
 name: Build, test, deploy
 
@@ -27,6 +27,9 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
       - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      # Static standards and copy checks, HTML validation, then browser checks
+      # (axe WCAG 2.2 AA in light and dark, keyboard focus, layout widths).
       - run: npm test
       - uses: actions/upload-pages-artifact@v3
         if: github.ref == 'refs/heads/master'
@@ -46,3 +49,18 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  # After deploy: wait for this commit to be live, then check what only exists
+  # in production (HTTPS redirect, status codes, content types, outbound links).
+  verify:
+    needs: deploy
+    runs-on: ubuntu-latest
+    env:
+      LIVE_URL: https://www.hyperdimensional.net
+      EXPECTED_REVISION: ${{ github.sha }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+      - run: npm run test:live
