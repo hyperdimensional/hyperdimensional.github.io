@@ -25,10 +25,10 @@ export default [
     summary: 'Play video like an instrument: a pad controller or keyboard becomes a live video sampler for the projector.',
   },
   {
-    name: 'Throughline',
+    name: 'Throughline Pocket VSM',
     url: 'https://throughline.fyi/',
     kind: 'tool',
-    summary: 'Pocket value stream mapping: map a process on your phone, see waste, find bottlenecks and track improvements.',
+    summary: 'Value stream mapping on your phone: see waste, find bottlenecks and track improvements.',
   },
   {
     name: 'Tidal Cycles MCP',
