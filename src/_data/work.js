@@ -25,7 +25,7 @@ export default [
     summary: 'Play video like an instrument: a pad controller or keyboard becomes a live video sampler for the projector.',
   },
   {
-    name: 'THROUGHLINE',
+    name: 'Throughline',
     url: 'https://throughline.fyi/',
     kind: 'tool',
     summary: 'Pocket value stream mapping: map a process on your phone, see waste, find bottlenecks and track improvements.',

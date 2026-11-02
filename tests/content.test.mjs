@@ -52,7 +52,7 @@ describe('Home page copy', () => {
       ['Drift', 'https://drift.place/'],
       ['HUIS CLOS', 'https://huisclos.org/'],
       ['Padjam', 'https://padjam.app/'],
-      ['THROUGHLINE', 'https://throughline.fyi/'],
+      ['Throughline', 'https://throughline.fyi/'],
       ['Tidal Cycles MCP', 'https://github.com/Benedict/tidal-cycles-mcp-server'],
     ];
     for (const [name, href] of projects) assert.match(main, new RegExp(`<a href="${href}">${name}</a>`), name);
