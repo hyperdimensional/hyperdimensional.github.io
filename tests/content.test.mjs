@@ -46,14 +46,17 @@ describe('Home page copy', () => {
     assert.deepEqual(h2, ['Consulting', 'Projects']);
   });
 
-  test('projects, each linked', () => {
-    for (const [name, href] of [
+  test('projects, each linked, in the agreed order', () => {
+    const projects = [
+      ['A Partial Guide', 'https://apartialguide.com/'],
+      ['Drift', 'https://drift.place/'],
+      ['HUIS CLOS', 'https://huisclos.org/'],
       ['Padjam', 'https://padjam.app/'],
       ['Tidal Cycles MCP', 'https://github.com/Benedict/tidal-cycles-mcp-server'],
-      ['Drift', 'https://drift.place/'],
-      ['A Partial Guide', 'https://apartialguide.com/'],
-      ['HUIS CLOS', 'https://huisclos.org/'],
-    ]) assert.match(main, new RegExp(`<a href="${href}">${name}</a>`), name);
+    ];
+    for (const [name, href] of projects) assert.match(main, new RegExp(`<a href="${href}">${name}</a>`), name);
+    const listed = [...main.matchAll(/<li class="work-item[^"]*"><a href="[^"]+">([^<]+)<\/a>/g)].map((m) => m[1]);
+    assert.deepEqual(listed, projects.map(([name]) => name));
   });
 
   test('links to the writing at profound.fyi', () => {
@@ -89,6 +92,8 @@ describe('Privacy notice', () => {
   });
 
   test('explains rights and the right to complain to the ICO', () => {
+    assert.match(main, /<h2 id="rights">Your rights<\/h2>/);
+    assert.match(main, /You can ask what personal data we hold about you/);
     assert.match(main, /<a href="https:\/\/ico\.org\.uk\/make-a-complaint\/">/);
   });
 
