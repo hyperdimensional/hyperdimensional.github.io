@@ -6,7 +6,7 @@ import { join, extname, normalize } from 'node:path';
 
 export const OUT = fileURLToPath(new URL('../_site/', import.meta.url));
 export const ORIGIN = process.env.SITE_URL ?? 'https://www.hyperdimensional.net';
-export const PAGES = ['index.html', '404.html'];
+export const PAGES = ['index.html', 'privacy/index.html', '404.html'];
 
 export const read = (f) => readFileSync(join(OUT, f), 'utf8');
 export const exists = (f) => existsSync(join(OUT, f));

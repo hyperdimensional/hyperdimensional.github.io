@@ -58,6 +58,7 @@ describe('Live site', { skip }, () => {
   });
 
   for (const [path, type] of [
+    ['/privacy/', /^text\/html/],
     ['/robots.txt', /^text\/plain/],
     ['/sitemap.xml', /xml/],
     ['/logo.svg', /^image\/svg\+xml/],

@@ -103,6 +103,19 @@ describe('SEO and discovery', () => {
   });
 });
 
+describe('Privacy', () => {
+  for (const page of PAGES)
+    test(`${page}: links to the privacy notice from the footer`, () => {
+      const html = read(page);
+      assert.match(html.slice(html.indexOf('<footer'), html.indexOf('</footer>')), /<a href="\/privacy\/">Privacy<\/a>/);
+    });
+
+  test('privacy notice is indexable and in the sitemap', () => {
+    assert.doesNotMatch(headOf(read('privacy/index.html')), /noindex/);
+    assert.match(read('sitemap.xml'), new RegExp(`<loc>${ORIGIN}/privacy/</loc>`));
+  });
+});
+
 describe('Resilience', () => {
   test('404 page is noindex and links home', () => {
     const html = read('404.html');

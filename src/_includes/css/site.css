@@ -71,15 +71,19 @@ body {
 @media (min-width: 64em) {
   .practices { grid-template-columns: 1fr 1fr; }
 }
-.practice { max-width: var(--measure); }
-.practice h2 {
+.practice,
+.prose { max-width: var(--measure); }
+.practice h2,
+.prose h2 {
   margin: 0 0 calc(var(--u) * 3);
   padding-top: calc(var(--u) * 2);
   border-top: var(--rule);
   font: 700 1.375rem/1.25 var(--sans);
   letter-spacing: -0.01em;
 }
-.practice p { margin: 0 0 calc(var(--u) * 2); }
+.practice p,
+.prose p { margin: 0 0 calc(var(--u) * 2); }
+.prose section { margin-bottom: calc(var(--u) * 6); }
 .aside { color: var(--muted); }
 
 /* ── Work list: name, then what it is ──────────────────────────────── */

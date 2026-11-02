@@ -28,6 +28,10 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ 'src/assets': '/' });
 
   eleventyConfig.addFilter('host', (url) => new URL(url).host);
+  // Front-matter dates arrive as Date objects (UTC midnight).
+  eleventyConfig.addFilter('isoDate', (d) => new Date(d).toISOString().slice(0, 10));
+  eleventyConfig.addFilter('longDate', (d) =>
+    new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }));
   eleventyConfig.addShortcode('logo', logo);
   eleventyConfig.addShortcode('logoPath', logoPath);
 

@@ -61,6 +61,35 @@ describe('Home page copy', () => {
   });
 });
 
+describe('Privacy notice', () => {
+  const html = read('privacy/index.html');
+  const main = between(html, '<main', '</main>');
+
+  test('names the controller and how to reach it', () => {
+    assert.match(main, /Hyperdimensional Limited/);
+    assert.match(main, /06255378/);
+    assert.match(main, /Kemp House, 152-160 City Road, London, EC1V 2NX/);
+  });
+
+  test('says what this site collects: nothing', () => {
+    assert.match(main, /no cookies/i);
+    assert.match(main, /no analytics/i);
+  });
+
+  test("states GitHub's IP logging, quoting GitHub, with a link to its privacy statement", () => {
+    assert.match(main, /IP address is logged and stored for security purposes/);
+    assert.match(main, /<a href="https:\/\/docs\.github\.com\/en\/site-policy\/privacy-policies\/github-general-privacy-statement">/);
+  });
+
+  test('explains rights and the right to complain to the ICO', () => {
+    assert.match(main, /<a href="https:\/\/ico\.org\.uk\/make-a-complaint\/">/);
+  });
+
+  test('is dated', () => {
+    assert.match(main, /<time datetime="\d{4}-\d{2}-\d{2}">/);
+  });
+});
+
 describe('Brand', () => {
   test('the mark is a 216-unit disc (18 glyph modules) with the glyph centred', () => {
     const svg = read('logo.svg').replace(/\s+/g, ' ');

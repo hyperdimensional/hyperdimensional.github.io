@@ -92,7 +92,7 @@ one-page static site on GitHub Pages, and which test checks each one.
 | --- | --- | --- |
 | No non-essential cookies or storage | ✅ | The site sets none, and the CSP blocks scripts |
 | No third-party scripts or analytics | ✅ | spec: no executable scripts |
-| Privacy policy | ⚠️ | Not published. The site collects nothing itself, but GitHub logs visitor IP addresses. |
+| Privacy policy | ✅ | `/privacy/`, linked from every footer. Names the controller, says the site collects nothing, quotes GitHub's IP logging and links its statement, and gives the right to complain to the ICO. content: privacy notice; spec: privacy; axe on the page. |
 
 ## Resilience
 

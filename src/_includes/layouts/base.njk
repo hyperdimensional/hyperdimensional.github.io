@@ -50,7 +50,7 @@
 </main>
 <footer class="site-footer">
 {%- set since = site.company.incorporated | truncate(4, true, "") %}
-<p>© {{ since }}–{{ build.year }} {{ site.company.legalName }}</p>
+<p>© {{ since }}–{{ build.year }} {{ site.company.legalName }} · <a href="/privacy/">Privacy</a></p>
 {%- set ro = site.company.registeredOffice %}
 <div class="legal">
 <p>Registered in {{ site.company.jurisdiction }}. Company number {{ site.company.number }}.</p>
