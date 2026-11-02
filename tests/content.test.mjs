@@ -92,6 +92,11 @@ describe('Privacy notice', () => {
     assert.match(main, /<a href="https:\/\/ico\.org\.uk\/make-a-complaint\/">/);
   });
 
+  test('stays plain: no lede, no filler', () => {
+    assert.doesNotMatch(main, /class="lede"/);
+    assert.doesNotMatch(main, /We don't see who visits|If you're unhappy|have their own privacy notices/);
+  });
+
   test('is dated', () => {
     assert.match(main, /<time datetime="\d{4}-\d{2}-\d{2}">/);
   });

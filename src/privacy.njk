@@ -2,43 +2,34 @@
 layout: layouts/base.njk
 permalink: privacy/index.html
 title: Privacy · hyperdimensional
-description: This site collects nothing about you. Its host, GitHub, logs visitor IP addresses for security.
+description: Privacy notice for hyperdimensional.net.
 updated: 2026-11-02
 ---
 {%- set ro = site.company.registeredOffice -%}
 <section class="hero">
 <h1 class="wordmark">privacy</h1>
-<p class="lede">This site collects nothing about you. The company that hosts it logs your IP address.</p>
 </section>
 
 <div class="prose">
 <section aria-labelledby="who">
 <h2 id="who">Who we are</h2>
-<p>{{ site.company.legalName }}, registered in {{ site.company.jurisdiction }}, company number {{ site.company.number }}. Registered office: {{ ro.street }}, {{ ro.locality }}, {{ ro.postalCode }}.</p>
-<p>For any question about privacy, email <a href="mailto:{{ site.contact.privacy }}">{{ site.contact.privacy }}</a> or write to the registered office.</p>
+<p>{{ site.company.legalName }}, company number {{ site.company.number }}, registered office {{ ro.street }}, {{ ro.locality }}, {{ ro.postalCode }}. Email <a href="mailto:{{ site.contact.privacy }}">{{ site.contact.privacy }}</a>.</p>
 </section>
 
-<section aria-labelledby="this-site">
-<h2 id="this-site">What this site collects</h2>
-<p>Nothing. There are no cookies, no analytics, no tracking, no forms and no scripts. We don't see who visits.</p>
+<section aria-labelledby="collect">
+<h2 id="collect">What we collect</h2>
+<p>Nothing. This site sets no cookies and has no analytics, forms or scripts.</p>
 </section>
 
-<section aria-labelledby="github">
-<h2 id="github">What GitHub collects</h2>
-<p>The site is hosted on GitHub Pages, run by GitHub, Inc. GitHub says: “When a GitHub Pages site is visited, the visitor's IP address is logged and stored for security purposes, regardless of whether the visitor has signed into GitHub or not.”</p>
-<p>We don't have access to those logs. GitHub's use of them is covered by the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub General Privacy Statement</a>.</p>
+<section aria-labelledby="hosting">
+<h2 id="hosting">Hosting</h2>
+<p>The site is hosted on GitHub Pages. GitHub says a visitor's “IP address is logged and stored for security purposes”. We can't see those logs. See the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub General Privacy Statement</a>.</p>
 </section>
 
-<section aria-labelledby="links">
-<h2 id="links">Other sites</h2>
-<p>The project links go to other sites, which have their own privacy notices.</p>
+<section aria-labelledby="complaints">
+<h2 id="complaints">Complaints</h2>
+<p>You can complain to the <a href="https://ico.org.uk/make-a-complaint/">Information Commissioner's Office</a>.</p>
 </section>
 
-<section aria-labelledby="rights">
-<h2 id="rights">Your rights</h2>
-<p>Under UK data protection law you can ask what personal data we hold about you. This site collects none, so we hold none from your visit. For GitHub's logs, contact GitHub as its statement describes.</p>
-<p>If you're unhappy with how your data is handled, you can <a href="https://ico.org.uk/make-a-complaint/">complain to the Information Commissioner's Office</a>.</p>
-</section>
-
-<p class="aside">Last updated <time datetime="{{ updated | isoDate }}">{{ updated | longDate }}</time>.</p>
+<p class="aside">Updated <time datetime="{{ updated | isoDate }}">{{ updated | longDate }}</time>.</p>
 </div>
