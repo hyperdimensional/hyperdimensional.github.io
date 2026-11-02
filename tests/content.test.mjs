@@ -15,6 +15,11 @@ describe('Legal (UK company website disclosures)', () => {
       assert.match(footer, /Company number 06255378/);
       assert.match(footer, /<address[^>]*>Registered office: Kemp House, 152-160 City Road, London, EC1V 2NX<\/address>/);
     });
+
+    test(`${page}: footer gives the general contact address`, () => {
+      const footer = between(read(page), '<footer', '</footer>');
+      assert.match(footer, /<a href="mailto:hello@hyperdimensional\.net">hello@hyperdimensional\.net<\/a>/);
+    });
   }
 
   test('JSON-LD carries the legal entity', () => {
@@ -23,6 +28,7 @@ describe('Legal (UK company website disclosures)', () => {
     assert.equal(ld.identifier, '06255378');
     assert.equal(ld.foundingDate, '2007-05-22', 'incorporation date at Companies House');
     assert.equal(ld.address?.postalCode, 'EC1V 2NX');
+    assert.equal(ld.email, 'hello@hyperdimensional.net');
   });
 });
 
@@ -40,14 +46,17 @@ describe('Home page copy', () => {
     assert.deepEqual(h2, ['Consulting', 'Projects']);
   });
 
-  test('projects, each linked', () => {
-    for (const [name, href] of [
+  test('projects, each linked, in the agreed order', () => {
+    const projects = [
+      ['A Partial Guide', 'https://apartialguide.com/'],
+      ['Drift', 'https://drift.place/'],
+      ['HUIS CLOS', 'https://huisclos.org/'],
       ['Padjam', 'https://padjam.app/'],
       ['Tidal Cycles MCP', 'https://github.com/Benedict/tidal-cycles-mcp-server'],
-      ['Drift', 'https://drift.place/'],
-      ['A Partial Guide', 'https://apartialguide.com/'],
-      ['HUIS CLOS', 'https://huisclos.org/'],
-    ]) assert.match(main, new RegExp(`<a href="${href}">${name}</a>`), name);
+    ];
+    for (const [name, href] of projects) assert.match(main, new RegExp(`<a href="${href}">${name}</a>`), name);
+    const listed = [...main.matchAll(/<li class="work-item[^"]*"><a href="[^"]+">([^<]+)<\/a>/g)].map((m) => m[1]);
+    assert.deepEqual(listed, projects.map(([name]) => name));
   });
 
   test('links to the writing at profound.fyi', () => {
@@ -58,6 +67,43 @@ describe('Home page copy', () => {
     for (const gone of [/established|993914803/i, /\b[MDCLXVI]{3,}\b/, /glitch|data-text=|@keyframes/,
       /same curiosity/i, /instruments for live|ways of seeing|unstick/i])
       assert.doesNotMatch(html, gone, String(gone));
+  });
+});
+
+describe('Privacy notice', () => {
+  const html = read('privacy/index.html');
+  const main = between(html, '<main', '</main>');
+
+  test('names the controller and how to reach it', () => {
+    assert.match(main, /<a href="mailto:privacy@hyperdimensional\.net">privacy@hyperdimensional\.net<\/a>/);
+    assert.match(main, /Hyperdimensional Limited/);
+    assert.match(main, /06255378/);
+    assert.match(main, /Kemp House, 152-160 City Road, London, EC1V 2NX/);
+  });
+
+  test('says what this site collects: nothing', () => {
+    assert.match(main, /no cookies/i);
+    assert.match(main, /no analytics/i);
+  });
+
+  test("states GitHub's IP logging, quoting GitHub, with a link to its privacy statement", () => {
+    assert.match(main, /IP address is logged and stored for security purposes/);
+    assert.match(main, /<a href="https:\/\/docs\.github\.com\/en\/site-policy\/privacy-policies\/github-general-privacy-statement">/);
+  });
+
+  test('explains rights and the right to complain to the ICO', () => {
+    assert.match(main, /<h2 id="rights">Your rights<\/h2>/);
+    assert.match(main, /You can ask what personal data we hold about you/);
+    assert.match(main, /<a href="https:\/\/ico\.org\.uk\/make-a-complaint\/">/);
+  });
+
+  test('stays plain: no lede, no filler', () => {
+    assert.doesNotMatch(main, /class="lede"/);
+    assert.doesNotMatch(main, /We don't see who visits|If you're unhappy|have their own privacy notices/);
+  });
+
+  test('is dated', () => {
+    assert.match(main, /<time datetime="\d{4}-\d{2}-\d{2}">/);
   });
 });
 

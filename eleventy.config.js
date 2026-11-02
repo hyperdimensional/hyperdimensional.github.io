@@ -28,10 +28,20 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ 'src/assets': '/' });
 
   eleventyConfig.addFilter('host', (url) => new URL(url).host);
+  // Front-matter dates arrive as Date objects (UTC midnight).
+  eleventyConfig.addFilter('isoDate', (d) => new Date(d).toISOString().slice(0, 10));
+  eleventyConfig.addFilter('longDate', (d) =>
+    new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }));
   eleventyConfig.addShortcode('logo', logo);
   eleventyConfig.addShortcode('logoPath', logoPath);
 
-  eleventyConfig.addGlobalData('build', { year: new Date().getUTCFullYear() });
+  const now = new Date();
+  eleventyConfig.addGlobalData('build', {
+    year: now.getUTCFullYear(),
+    // security.txt Expires must be under a year ahead (RFC 9116 §2.5.5);
+    // the scheduled monthly rebuild keeps it fresh.
+    securityTxtExpires: new Date(now.getTime() + 360 * 86400000).toISOString().replace(/\.\d{3}Z$/, 'Z'),
+  });
 }
 
 export const config = {

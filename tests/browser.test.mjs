@@ -8,7 +8,7 @@ import { serveSite } from './helpers.mjs';
 
 const WIDTHS = [320, 375, 768, 1024, 1440, 1920];
 const SCHEMES = ['light', 'dark'];
-const PATHS = { home: '/', '404': '/no-such-page' };
+const PATHS = { home: '/', privacy: '/privacy/', '404': '/no-such-page' };
 
 let server, browser;
 before(async () => {

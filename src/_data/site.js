@@ -10,6 +10,12 @@ export default {
   description: 'We help organisations whose technology delivery has stalled. We also make our own software.',
   // Legal entity, as registered at Companies House. Shown in every page footer
   // (UK Company, LLP and Business (Names and Trading Disclosures) Regulations 2015).
+  // Published contact addresses.
+  contact: {
+    general: 'hello@hyperdimensional.net',
+    privacy: 'privacy@hyperdimensional.net',
+    security: 'security@hyperdimensional.net',
+  },
   company: {
     legalName: 'Hyperdimensional Limited',
     number: '06255378',
